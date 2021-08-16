@@ -1,5 +1,27 @@
 {
   "dependencies": {
+    "mysql2": "^2.3.0",
     "nodemon": "^2.0.12"
-  }
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+    
+  },
+  "name": "nodeserver",
+  "description": "vi skal opbygge en node server fra grunden.",
+  "version": "0.0.1",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vraksi/H5Serverside.git"
+  },
+  "keywords": [
+    "Jakob"
+  ],
+  "author": "Jakob",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vraksi/H5Serverside/issues"
+  },
+  "homepage": "https://github.com/Vraksi/H5Serverside#readme"
 }
