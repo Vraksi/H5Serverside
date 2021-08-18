@@ -44,8 +44,7 @@ exports.streamfile = function(req, res, filepath){
     stream.on("error", err => {
         console.log(err),
         exports.send(req, res, err, 404)
-    } 
-    );
+    });
     res.statusCode = 200;  
     res.setHeader("Content-type", mime);
     stream.pipe(res);

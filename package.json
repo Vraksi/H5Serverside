@@ -1,11 +1,12 @@
 {
   "dependencies": {
+    "mssql": "^7.2.0",
     "mysql2": "^2.3.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "rxjs": "^7.3.0"
   },
   "scripts": {
     "start": "nodemon server.js"
-    
   },
   "name": "nodeserver",
   "description": "vi skal opbygge en node server fra grunden.",

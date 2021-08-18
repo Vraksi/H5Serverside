@@ -3,8 +3,8 @@ const logger = require("./logger");
 const api = {}
 
 api["/api/duck"] = require("./api/duck")
-//api["/api/duck/id"] = require("./api/duck")
 api["/api/cat"] = require("./api/cat")
+api["/api/dog"] = require("./api/dog")
 
 module.exports = function (req, res){
     logger(req, res);
@@ -21,18 +21,14 @@ module.exports = function (req, res){
     }
 
     //hvis jeg er her så er der ikke et match ovenover
-    const apiRX = /(^\/api\/\w+)(\/\w+)?$/
+    //const apiRX = /(^\/api\/\w+)((\/\w+)*?)$/
+    const apiRX = /^(?<route>\/api\/\w+)(?<params>(\/\w+)*)$/
     result = endpoint.match(apiRX);
     console.log(result);
     if(result){
-        if(api[result[1]]){
-            if(api[result[1]][req.method]){
-                if(result[2]){
-                    api[result[1]][req.method].handler(req, res, result[2]);    
-                    return;    
-                }      
-                
-                api[result[1]][req.method].handler(req, res);
+        if(api[result.groups.route]){
+            if(api[result.groups.route][req.method]){
+                api[result[1]][req.method].handler(req, res, result[2]);    
                 return;
             }
             helpers.send(req, res, {msg: "metode ikke tilladt her"}, 405);
