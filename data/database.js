@@ -18,9 +18,7 @@ exports.ConnectGet = async function(){
         let string = ""
         await sql.query(`SELECT * FROM Hunde`).then( 
             res =>{ 
-            //console.log("RESULT " + JSON.stringify(res))
             string = JSON.stringify(res.recordset)
-            //return test;
         })
         //console.log(string);
         return string
