@@ -16,4 +16,4 @@ INSERT INTO Hunde(Navn, Ejer, Art, EjerTlf ) VALUES ('Bigtop', 'Lonny', 'Rottwei
 INSERT INTO Hunde(Navn, Ejer, Art, EjerTlf ) VALUES ('Dumbo', 'Fthagen', 'Cthulu', 798921)
 INSERT INTO Hunde(Navn, Ejer, Art, EjerTlf ) VALUES ('Rex', 'Alan', 'Rottweiler', 1238955)
 
-SELECT * FROM Hunde WHERE Id = 1
+SELECT * FROM Hunde

@@ -2,6 +2,7 @@ const fs = require("fs");
 const mimetypes = require("./mimetypes")
 const path = require("path");
 
+
 exports.send = function(req, res, msg, status = 200){
     res.statusCode = status;
     res.setHeader("Content-type", "application/json");
@@ -21,7 +22,21 @@ exports.sendFile = function(req, res, filepath){
     })
 }
 
-
+exports.getRequestData = function(req) {
+    return new Promise(function(resolve, reject) {
+        let body = "";
+        req.on("data", chunk => {
+            body += chunk;
+        });
+        req.on("end", () => {
+            body = JSON.parse(body);
+            resolve(body);
+        })
+        req.on("error", err => {
+            reject(err)
+        })
+    })
+}
 
 exports.sendFileTest = function(req, res, filepath){
     const ext = path.extname(filepath);

@@ -1,8 +1,16 @@
 const sql = require('mssql')
-const {send} = require('../helpers')
+const {send, getRequestData} = require('../helpers')
 const database = require('../data/database');
 const { request } = require('http');
 const { buffer } = require('rxjs');
+
+let Hund = {
+    Id: 0,
+    Navn: "",
+    Ejer: "",
+    Art: "",
+    EjerTlf: 123
+}
 
 module.exports = {
     GET: {
@@ -35,33 +43,44 @@ module.exports = {
         }
     },
     POST:{
-        paramBody: "body",
-        handler: async function (req, res, paramBody) {  
-            let body = []
-            req.on(
-                'data', (chunk) => {
-                    body.push(chunk);
-                }).on('end', () =>
-                body = Buffer.concat(body).toString());
+        handler: async function (req, res, paramBody) {              
+            getRequestData(req).then(inc => {
+                database.ConnectPost(inc)
+                send(req, res, inc)  
+            })
+            .catch(err => {
+                console.log("error " + err);
+                send(req, res, err, 500)
+            })
+            //let params = paramBody !== ''? paramBody.replace("/", "").split("/"): null;
             
-            console.log(body)
-            let params = paramBody !== ''? paramBody.replace("/", "").split("/"): null;
-            if(params == null)
-            {
-                return
-            }
-            console.log(params)
-            database.ConnectPost(params[0],params[1],params[2],params[3]).then(s => {               
-                send(req, res, {says: "Posted with " + params[0], method: req.method});     
-                return;   
-            });
         }
     },
     PUT:{
+        handler: async function (req, res, paramBody) {              
+            getRequestData(req).then(inc => {
+                database.ConnectPut(inc)
+                send(req, res, inc)  
+            })
+            .catch(err => {
+                console.log("error " + err);
+                send(req, res, err, 500)
+            })
+            //let params = paramBody !== ''? paramBody.replace("/", "").split("/"): null;
+            
+        }
 
     },
     DELETE:{
-
+        param: "id",
+        handler: async function(req, res, param){
+                let params = param !== ''? param.replace("/", "").split("/"): null;                
+                database.ConnectDelete(params).then(s => {
+                    send(req, res, {navn: "id"}, 200)
+                    return;   
+                });
+                
+        }
     }
 
 }
