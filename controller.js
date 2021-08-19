@@ -9,13 +9,10 @@ api["/api/dog"] = require("./api/dog")
 module.exports = function (req, res){
     logger(req, res);
     const endpoint = new URL(req.url, "http://localhost:5000/").pathname;
-    //Regex imellem /REGEX/
     const regEx = /^\/((css|img|js)\/)?[\w-]+\.(html|css|png|js|jpe?g)$/
     let result = endpoint.match(regEx);
-    //console.log(result);
 
     if(result){
-        //helpers.sendFileTest(req, res, "./static/" + result[0])
         helpers.streamfile(req, res, "./static/" + result[0]);
         return;
     }
