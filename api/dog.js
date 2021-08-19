@@ -20,20 +20,14 @@ module.exports = {
                 let string = ""
                 if(params == null){
                     database.ConnectGet().then(s => {
-                        //console.log(s);                    
-                        string = JSON.parse(s)
-                        //console.log(string);
-                        
+                        string = JSON.parse(s);                        
                         send(req, res, {says: string, method: req.method, param: params});     
                         return;   
                     });
                 }
                 else{
                     database.ConnectGetId(params).then(s => {
-                        //console.log(s);                    
-                        string = JSON.parse(s)
-                        //console.log(string);
-                        
+                        string = JSON.parse(s)                        
                         send(req, res, {says: string, method: req.method, param: params});     
                         return;   
                     });
@@ -52,7 +46,6 @@ module.exports = {
                 console.log("error " + err);
                 send(req, res, err, 500)
             })
-            //let params = paramBody !== ''? paramBody.replace("/", "").split("/"): null;
             
         }
     },
@@ -66,7 +59,6 @@ module.exports = {
                 console.log("error " + err);
                 send(req, res, err, 500)
             })
-            //let params = paramBody !== ''? paramBody.replace("/", "").split("/"): null;
             
         }
 

@@ -33,18 +33,13 @@ exports.ConnectGetId = async function(id){
         let string = ""
         await sql.query(`SELECT * FROM Hunde WHERE Id = ${id}`).then( 
             res =>{ 
-            //console.log("RESULT " + JSON.stringify(res))
             string = JSON.stringify(res.recordset)
-            //return test;
         })
-        //console.log(string);
         return string
     } catch (err) {
         console.log("error = " + err);   // ... error checks
     }
 }
-
-//INSERT INTO Hunde(Navn, Ejer, Art, EjerTlf ) VALUES ('${navn}', '${ejer}', '${art}', ${ejerTlf})
 
 exports.ConnectPost = async function(Hund){
     try {
@@ -69,7 +64,6 @@ exports.ConnectPut = async function(Hund){
             res =>{ 
                 console.log("Updated ID " + Hund.Id);
         })
-        //console.log(string);
         return string
     } catch (err) {
         console.log("error = " + err);   // ... error checks
