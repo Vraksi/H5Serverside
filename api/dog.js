@@ -52,12 +52,12 @@ module.exports = {
     PUT:{
         handler: async function (req, res, paramBody) {              
             getRequestData(req).then(inc => {
-                database.ConnectPut(inc)
-                send(req, res, inc)  
+                database.ConnectPut(inc);
+                send(req, res, inc);
             })
             .catch(err => {
                 console.log("error " + err);
-                send(req, res, err, 500)
+                send(req, res, err, 500);
             })
             
         }

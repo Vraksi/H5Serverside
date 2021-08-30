@@ -20,7 +20,6 @@ exports.ConnectGet = async function(){
             res =>{ 
             string = JSON.stringify(res.recordset)
         })
-        //console.log(string);
         return string
     } catch (err) {
         console.log("error = " + err);   // ... error checks
